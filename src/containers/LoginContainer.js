@@ -4,6 +4,19 @@ import LoginForm from '../components/LoginForm'
 
 export default class LoginContainer extends Component {
 
+  state = {
+    username: "",
+    password: ""
+  }
+
+  updateUsername = (username) => {
+    this.setState({username})
+  }
+
+  updatePassword = (password) => {
+    this.setState({password})
+  }
+
   render() {
     return(
       <header className="App-header">
@@ -11,7 +24,13 @@ export default class LoginContainer extends Component {
         <p>
           Find your next Job
         </p>
-        <LoginForm />
+        <LoginForm 
+          username={this.state.username}
+          password={this.state.password}
+          updateUsername={this.updateUsername}
+          updatePassword={this.updatePassword}
+          submitForm={this.props.authorizeUser}
+        />
 
       </header>
 
