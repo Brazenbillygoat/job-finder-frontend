@@ -10,12 +10,12 @@ export default class LoginForm extends Component {
           <h2 class="login-header">Login</h2>
           <label>
             <h4>Username:</h4>
-            <input type="text" value={username} />
+            <input type="text" value="{username}" />
           </label>
           <br/>
           <label>
           <h4>Password:</h4>
-            <input type="password" value={password} />
+            <input type="password" value="{password}" />
           </label>
           <br/>
           <input class="btn btn-primary" type="submit" value="Submit" />
