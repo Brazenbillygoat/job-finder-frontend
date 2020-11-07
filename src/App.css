@@ -5,6 +5,7 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  border-radius: 100px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -47,4 +48,9 @@
 
 .login-input {
   color: rgb(43, 41, 41);
+}
+
+.signup-password-validation {
+  font-size: 1.4rem;
+  color: red;
 }

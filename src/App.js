@@ -1,8 +1,19 @@
 
+import React, { Component } from 'react';
 import './App.css';
-import LoginContainer from './containers/LoginContainer'
+import LoginContainer from './containers/LoginContainer';
 
-const authorizeUser = (e, username, password) => {
+export default class App extends Component {
+
+  state = {
+    newuser: true
+  }
+
+updateNewUser = (newuser) => {
+  this.setState({ newuser })
+}
+
+authorizeUser = (e, username, password) => {
   e.preventDefault();
   let userCreds = {
     username: e.currentTarget.elements[0].value, 
@@ -15,18 +26,18 @@ const authorizeUser = (e, username, password) => {
   // })
 }
 
-function App() {
-
-
-
-
-  return (
-    <div className="App">
-      <LoginContainer 
-        authorizeUser={authorizeUser}
-      />
-    </div>
-  );
+  
+  render() {
+    return (
+      <div className="App">
+        <LoginContainer 
+          authorizeUser={this.authorizeUser}
+          userExists={this.state.newuser}
+          updatenewuser={this.updateNewUser}
+        />
+      </div>
+    );
+  }
 }
 
-export default App;
+
