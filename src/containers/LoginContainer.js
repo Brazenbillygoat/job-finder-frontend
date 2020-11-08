@@ -16,10 +16,10 @@ export default class LoginContainer extends Component {
   //this changes what the button ad label at the top of the LoginForm will display
 
   formLabel =() => {
-    if (this.props.userExists) {
-      return "Log In"
+    if (this.props.newUser) {
+      return "Sign Up"
     } 
-    return "Sign Up"
+    return "Log In"
   }
 
   resetForm = () => {
@@ -59,7 +59,7 @@ export default class LoginContainer extends Component {
     return(
       <div>
         <NavBar 
-          userExists={this.props.userExists}
+          newUser={this.props.newUser}
           updatenewuser={this.props.updatenewuser} 
           resetForm={this.resetForm}
         />

@@ -18,8 +18,30 @@ export default class LoginForm extends Component {
             passwordsMatch
           } = this.props
       
+    //the below method decides whether to display one or two password entry forms
+    //depending on whether someone is signing up or logging in
+    //and calls a method to validate that the passwords match
     const passwordConfirmation = () => {
-        if (formlabel === "Log In") {
+        if (formlabel === "Sign Up") {
+          return (
+            <label>
+              <h4>Password:</h4>
+              <input class="login-input"
+                    type="password" 
+                    value={password}
+                    onChange={(e) => updatePassword(e.target.value)}
+              />
+              <br />
+              {passwordsMatch()}
+              <h4>Re-enter Password:</h4>
+                <input class="login-input"
+                      type="password" 
+                      value={confirmPassword}
+                      onChange={(e) => updateConfirmPassword(e.target.value)}
+                />
+            </label>
+          )
+        }
           return (
             <label>
             <h4>Password:</h4>
@@ -31,25 +53,6 @@ export default class LoginForm extends Component {
             </label>
           )
         }
-        return (
-          <label>
-            <h4>Password:</h4>
-            <input class="login-input"
-                  type="password" 
-                  value={password}
-                  onChange={(e) => updatePassword(e.target.value)}
-            />
-            <br />
-            {passwordsMatch()}
-            <h4>Re-enter Password:</h4>
-              <input class="login-input"
-                    type="password" 
-                    value={confirmPassword}
-                    onChange={(e) => updateConfirmPassword(e.target.value)}
-              />
-          </label>
-        )
-      }
 
     return(
       <div class="login-div">
