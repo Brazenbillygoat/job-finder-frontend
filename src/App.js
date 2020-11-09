@@ -17,13 +17,29 @@ updateNewUser = (newuser) => {
 
 authorizeUser = (e, username, password) => {
   e.preventDefault();
-  let userCreds = {
-    username: e.currentTarget.elements[0].value, 
+  let login = {
+    name: e.currentTarget.elements[0].value, 
     password: e.currentTarget.elements[1].value
+  }
+  let signUp = {
+    name: e.currentTarget.elements[0].value, 
+    password: e.currentTarget.elements[1].value,
+    // isGovernment: e.currentTarget.elements[2].value
   }
   
   if (this.state.newuser === false) {
     console.log("I will log this user in")
+    fetch(`${baseUrl}/users/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(login)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Hello again")
+    })
     
   } else {
     console.log("I will create a  new user")
@@ -32,7 +48,7 @@ authorizeUser = (e, username, password) => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(userCreds)
+          body: JSON.stringify(signUp)
         })
         .then(res => res.json())
         .then(data => {
