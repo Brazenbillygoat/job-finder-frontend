@@ -5,7 +5,7 @@ export default class NavBar extends Component {
   navbarSignupOrLoginButton = () => {
     if (!this.props.newUser) {
       return (
-        <button class="navbar-signup" onClick={() => {this.props.updatenewuser(true);
+        <button className="navbar-signup" onClick={() => {this.props.updatenewuser(true);
                                                  this.props.resetForm();  
                                                 }
                                           }>
@@ -14,7 +14,7 @@ export default class NavBar extends Component {
       )
     }
     return(
-      <button class="navbar-signup" onClick={() => {this.props.updatenewuser(false);
+      <button className="navbar-signup" onClick={() => {this.props.updatenewuser(false);
                                                this.props.resetForm();
                                               }
                                         }>
@@ -32,9 +32,9 @@ export default class NavBar extends Component {
 
     return(
       <div>
-        <nav class="navbar  navbar-light bg-light">
-          <a class="navbar-brand" href="#">
-            <img src="images/hardhat-worker.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy" />
+        <nav className="navbar  navbar-light bg-light">
+          <a className="navbar-brand" href="#">
+            <img src="images/hardhat-worker.png" width="30" height="30" className="d-inline-block align-top" alt="" loading="lazy" />
             Job Finder
           </a>
           {this.navbarSignupOrLoginButton()}
