@@ -54,3 +54,72 @@
   font-size: 1.4rem;
   color: red;
 }
+
+#title {
+  text-align: center;
+  font-family: arial, sans-serif;
+}
+
+#jobs {
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  width: 100%;
+}
+
+#jobs td, #jobs th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#jobs tr:nth-child(even){background-color: #f2f2f2;}
+
+#jobs tr:hover {background-color: #ddd;}
+
+#jobs th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+}
+
+#button {
+    position: absolute;
+    height: 10%;
+    width: 10%;
+    top: 50%;
+    left:50%;
+    font-size: 2.6vmin;
+    cursor: pointer;
+    box-shadow: rgba(255, 255, 255, 0.05) 0px 3px 20px;
+    border-width: initial;
+    background-color: grey;
+    color: white;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    outline: none;
+}
+
+.opration {
+  text-align: center;
+}
+
+.button {
+  border: none;
+  outline: none;
+  font-size: 11px;
+  font-family: "Quicksand", sans-serif;
+  color: #f44336;
+  padding: 3px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid #f44336;
+  background-color: transparent;
+}
+
+.button:active {
+  border: 1px solid blue;
+}

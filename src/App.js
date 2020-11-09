@@ -2,13 +2,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import LoginContainer from './containers/LoginContainer';
+import MainContainer from './containers/MainContainer'
 let baseUrl = 'http://localhost:3000';
 
 
 export default class App extends Component {
 
   state = {
-    newuser: false
+    newuser: false,
+    loggedIn: false 
   }
 
 updateNewUser = (newuser) => {
@@ -63,12 +65,16 @@ authorizeUser = (e, username, password) => {
   
   render() {
     return (
-      <div className="App">
-        <LoginContainer 
+      <div className="App">  
+      
+        {/* 
+          uncomment when needed
+          <LoginContainer 
           authorizeUser={this.authorizeUser}
           newUser={this.state.newuser}
           updatenewuser={this.updateNewUser}
-        />
+        /> */}
+        <MainContainer />
       </div>
     );
   }

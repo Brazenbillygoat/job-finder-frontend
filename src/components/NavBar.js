@@ -24,6 +24,10 @@ export default class NavBar extends Component {
     
   }
 
+  navbarMakeJob = () => {
+    
+  }
+
   render() {
 
     return(
