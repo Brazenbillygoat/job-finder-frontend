@@ -26,11 +26,10 @@ authorizeUser = (e, username, password) => {
   let signUp = {
     name: e.currentTarget.elements[0].value, 
     password: e.currentTarget.elements[1].value,
-    // isGovernment: e.currentTarget.elements[2].value
+    isGovernment: e.currentTarget.elements[3].value === "true" ? true : false
   }
   
   if (this.state.newuser === false) {
-    console.log("I will log this user in")
     fetch(`${baseUrl}/users/login`, {
       method: 'POST',
       headers: {
@@ -44,7 +43,6 @@ authorizeUser = (e, username, password) => {
     })
     
   } else {
-    console.log("I will create a  new user")
         fetch(`${baseUrl}/users`, {
           method: 'POST',
           headers: {
@@ -54,7 +52,7 @@ authorizeUser = (e, username, password) => {
         })
         .then(res => res.json())
         .then(data => {
-          console.log("hello")
+          console.log("hello", data)
         })
         .catch((error) => {
           console.log('Error:', error)
@@ -67,8 +65,8 @@ authorizeUser = (e, username, password) => {
     return (
       <div className="App">  
       
-        {/* 
-          uncomment when needed
+        
+          {/* uncomment when needed
           <LoginContainer 
           authorizeUser={this.authorizeUser}
           newUser={this.state.newuser}

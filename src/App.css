@@ -75,14 +75,18 @@
 
 #jobs tr:nth-child(even){background-color: #f2f2f2;}
 
-#jobs tr:hover {background-color: #ddd;}
+#jobs tr:hover {background-color: lightblue;}
 
 #jobs th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #4CAF50;
+  background-color: darkslategrey;
   color: white;
+}
+
+.homePage {
+  background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAA0NDR4XHiIhIRYtMCgvRTwwRTk9PUktPERFQz0zRjA3Li0wMC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tMS0rLS0BCwgJFxUVFRUVFRUdFR0VHRYVHRUVFR0iFRUdHR0dGiYeIh0dJigdJiMaFR0eMh4mKCsuLi4VHDU7NSw6Ji4uLf/AABEIAJ8BPgMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAQIDBv/EACAQAQEBAAIDAAIDAAAAAAAAAAARAQISITFBA2ETUYH/xAAYAQEBAQEBAAAAAAAAAAAAAAAAAQIDBP/EABkRAQEBAQEBAAAAAAAAAAAAAAABETECQf/aAAwDAQACEQMRAD8A92KPQ4IKAAAAoJBns3ElXEAVAAAAAUBBQEUAAABQAAAAAABpAFSixBBYQEFiQGBQEGoQEFgAxz1ty5Yl41GW+OsOueWZ1aoK2wigCCgICqIKIAAAAAAACgpBAAAUIAqKABABUgOa5hGoBBU0aETeUct5VLcMb3l+2JfqLWbdWTDMbxnitgNhvgalSwICsrEAAAAAAABQAAABQAAAUAABUUBQGgAHOrWVoLWeWwct2pbhIggxrWKrIa03iazFEdkxnsvHVRoazEiys2ICtCCgAAAKCKAAAAoCCgAAAACgCoAAAOajG8ktww565hGLWpMBYQaRapASqsTqCmZ+06pAbzw6Wufpc8/CVmtBVdGUUAAiggoCBFAAAAAFAAAAAAAFAEFAceTnHXlrlWPXV88WFQ3EaWp7XcXMESJ6b4s6KY0cRUTslXliRB37ZrO8YnW63x5/oGcaOfGOecmvN+JY6ANIAAAAAoIoAAAAAKigAACgAACBQcOY6csc2L1YyKiNKYiiNcWNdOP1z0qunH0i56RUTki8kQdfuJJVz3hv0aTN8GEq8chOs1RR0ZAAAAFQAFARQABQRQAAAAAABCKgM8nJ0565seliCojYqUoNZrOrYVBrN8MlZoNchrjtTqDf3F/tep9BnPTWemca4+lnWaDSOjKDSxBkUURViRBagKLEFiCDUSAgCgAANEQSKRUVhP8AWkijjy1l0/jYYVBoMaZhGkBFE3QRKsIg3wa+n4m940GWm8w6g59Ycc8OvVnrFnWaixoa1GYi0qhCosAqpCALBUokFQClU6ghF6kNTCHVVqarJQgFGup1n1NTHNoFVx7Rcms6uefTDabxc98OvaNZ5UcEdeXBz3IgiiggCjt+PHSuf4tdQT18azUjO8YDqm4xnJ1zyDnEahGtYYixpYupjEVqCauMRY0dTUxmJG+rJpiEUVRexCIL2ZoGAdf2IB2XsjMoOuaOc3PNO2INFc88tKP/2Q==");
 }
 
 #button {
@@ -122,4 +126,19 @@
 
 .button:active {
   border: 1px solid blue;
+}
+.navbar a {
+  color: white;
+}
+
+.navbar li {
+  color: white;
+}
+
+.navbar img {
+  background-color: turquoise;
+}
+
+.navbar {
+  margin-bottom: 0%;
 }

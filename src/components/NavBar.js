@@ -5,21 +5,21 @@ export default class NavBar extends Component {
   navbarSignupOrLoginButton = () => {
     if (!this.props.newUser) {
       return (
-        <button class="navbar-signup" onClick={() => {this.props.updatenewuser(true);
+        <li class="glyphicon glyphicon-user" onClick={() => {this.props.updatenewuser(true);
                                                  this.props.resetForm();  
                                                 }
                                           }>
           Sign Up
-        </button>
+        </li>
       )
     }
     return(
-      <button class="navbar-signup" onClick={() => {this.props.updatenewuser(false);
+      <li class="glyphicon glyphicon-log-in" onClick={() => {this.props.updatenewuser(false);
                                                this.props.resetForm();
                                               }
                                         }>
         Log In
-      </button>
+      </li>
     )
     
   }
@@ -32,13 +32,25 @@ export default class NavBar extends Component {
 
     return(
       <div>
-        <nav class="navbar  navbar-light bg-light">
-          <a class="navbar-brand" href="#">
+        <nav className="navbar  navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Job Finder</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="active"><img src="images/hardhat-worker.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy" /></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              {/* <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> */}
+                {this.navbarSignupOrLoginButton()}
+            </ul>
+          </div>
+        </nav>
+          {/* <a class="navbar-brand" href="#">
             <img src="images/hardhat-worker.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy" />
             Job Finder
-          </a>
-          {this.navbarSignupOrLoginButton()}
-        </nav>
+          </a> */}
       </div>
     )
   }
