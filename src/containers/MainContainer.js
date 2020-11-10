@@ -7,8 +7,12 @@ class MainContainer extends Component {
     render() {
         return (
             <div>
-                <NavBar />
-                <HomePage />
+                <div>
+                    <NavBar />
+                </div>
+                <div>
+                    <HomePage />
+                </div>
             </div>
         );
     }
