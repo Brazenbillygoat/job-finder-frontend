@@ -36,8 +36,9 @@ authorizeUser = (e, username, password) => {
       body: JSON.stringify(login)
     })
     .then(res => res.json())
-    .then(data => {
-      console.log("Hello again")
+    .then(user => {
+        localStorage.setItem("userId", JSON.stringify(user.id))
+        localStorage.setItem("userName", JSON.stringify(user.name))
     })
     
   } else {
