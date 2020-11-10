@@ -4,7 +4,7 @@ import TestTable from './TestTable'
 class HomePage extends Component {
 
     state = {
-        viewJobs: false
+        viewJobs: true
     }
     
     
@@ -20,7 +20,9 @@ class HomePage extends Component {
     render() {
         return (
             <div>
-                {this.state.viewJobs ? <div><TestTable /><button onClick={this.exitJobsTable}>Exit</button></div> : <button onClick={this.showJobsTable}>Jobs</button>}
+                {this.state.viewJobs ? <div><TestTable /><button onClick={this.exitJobsTable}>Exit</button></div> 
+                : <button onClick={this.showJobsTable}>Jobs</button>}
+                <button>Create Job</button>
             </div>
         );
     }
