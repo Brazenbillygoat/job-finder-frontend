@@ -10,7 +10,29 @@ class HomePage extends Component {
     state = {
         viewJobs: false
     }
-    
+
+    // getAllJobs = () => {
+    //     debugger
+    //     fetch("http//:localhost3000/jobs")
+    //     .then(resp => resp.json())
+    //     .then(jobs => {
+    //         debugger
+    //         this.props.updateAllJobs(jobs)
+    //         console.log(jobs)
+    //     })
+    // }
+
+    // componentDidMount() {
+    //     // this.getAllJobs()
+        
+    //     fetch("http://localhost3000/jobs")
+    //     .then(resp => resp.json())
+    //     .then(jobs => {
+    //         debugger
+    //         this.props.updateAllJobs(jobs)
+    //         console.log(jobs)
+    //     })
+    // }
     
     showJobsTable = () => {
         this.setState({ viewJobs: true})
@@ -22,7 +44,8 @@ class HomePage extends Component {
     
     
     render() {
-        const { name, price, deadline, updateJobName, updateJobPrice, updateJobDeadline } = this.props
+        const { name, price, deadline, allJobs, updateJobName, updateJobPrice, updateJobDeadline, updateAllJobs } = this.props
+        // this.getAllJobs()
         return (
             <Router>
                 
