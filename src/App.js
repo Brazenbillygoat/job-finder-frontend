@@ -38,8 +38,9 @@ authorizeUser = (e, username, password) => {
       body: JSON.stringify(login)
     })
     .then(res => res.json())
-    .then(data => {
-      console.log("Hello again")
+    .then(user => {
+        localStorage.setItem("userId", JSON.stringify(user.id))
+        localStorage.setItem("userName", JSON.stringify(user.name))
     })
     
   } else {
@@ -51,8 +52,9 @@ authorizeUser = (e, username, password) => {
           body: JSON.stringify(signUp)
         })
         .then(res => res.json())
-        .then(data => {
-          console.log("hello", data)
+        .then(user => {
+          localStorage.setItem("userId", JSON.stringify(user.id))
+          localStorage.setItem("userName", JSON.stringify(user.name))
         })
         .catch((error) => {
           console.log('Error:', error)
