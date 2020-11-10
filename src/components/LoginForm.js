@@ -64,7 +64,7 @@ export default class LoginForm extends Component {
               <input className="login-input"
                     type="password" 
                     value={password}
-                    onChange={(e) => updatePassword(!e.target.value)}
+                    onChange={(e) => updatePassword(e.target.value)}
               />
             </label>
           )
