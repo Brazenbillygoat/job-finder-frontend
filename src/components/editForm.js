@@ -1,23 +1,38 @@
 import React, { Component } from 'react';
 
-class editForm extends Component {
-    render() {
-        return (
-            <form id= "add-app">
 
-                <label>Name: </label>
-                <input type="text"> </input>
+export default class EditForm extends Component {
 
-                <label> Email: </label>
-                <input type="text" ></input>
+  render() {
 
-                <label>Phone: </label>
-                <input type="text"></input>
+    const { name, price, deadline, updateJobName, updateJobPrice, updateJobDeadline } = this.props
 
-                <button>Create</button>
-            </form>
-        );
-    }
+    return(
+
+      <div>
+        <form>
+          
+          <h2 className="new-job-header">Edit {name}</h2>
+          <label>
+            <h4>Asking Price:</h4>
+            <input className="job-input"
+                   type="number"
+                   step="0.01"
+                   value={price}
+                   onChange={(e) => updateJobPrice(e.target.value)}
+            />
+          </label>
+          <label>
+            <h4>Job Name:</h4>
+            <input className="job-input"
+                   type="datetime-local"
+                   value={deadline}
+                   onChange={(e) => updateJobDeadline(e.target.value)}
+            />
+          </label>
+
+        </form>
+      </div>
+    )
+  }
 }
-
-export default editForm;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import LoginContainer from '../containers/LoginContainer'
-import editForm from './editForm'
+import editForm from './EditForm'
 
 
 //Example api need to use our api here 
@@ -34,7 +34,7 @@ const Table = () => {
 
     //Need to refactor when we get our api
     const renderHeader = () => {
-        let headerElement = ['id', 'name', 'email', 'phone', 'operation']
+        let headerElement = ['id', 'Job', 'Price', 'Deadline', 'Awarded Company', 'operation']
 
         return headerElement.map((key, index) => {
             return <th key={index}>{key.toUpperCase()}</th>
@@ -50,11 +50,11 @@ const Table = () => {
                     <td>{name}</td>
                     <td>{email}</td>
                     <td>{phone}</td>
+                    <td>Name of Company</td>
                     <td className='opration'>
                         {/* add buttons here for edit */}
-                        <button className='button' onClick={() => removeData(id)}>Delete</button>
+                        <button className='button' onClick={() => removeData(id)}>Delete</button>                        
                         <button className='button' onClick={() => setShown(true)}>Edit</button>
-
                     </td>
                 </tr>
             )

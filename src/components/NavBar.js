@@ -35,10 +35,11 @@ export default class NavBar extends Component {
         <nav className="navbar  navbar-inverse">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a class="navbar-brand" href="#">Job Finder</a>
+              <a class="navbar-brand" href="/">Job Finder</a>
             </div>
             <ul class="nav navbar-nav">
               <li class="active"><img src="images/hardhat-worker.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy" /></li>
+              <li><a href="/jobs/new">Create a Job</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               {/* <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

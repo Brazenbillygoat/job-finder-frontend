@@ -68,13 +68,13 @@ authorizeUser = (e, username, password) => {
       <div className="App">  
       
         
-          {/* uncomment when needed
+          {/* uncomment when needed */}
           <LoginContainer 
           authorizeUser={this.authorizeUser}
           newUser={this.state.newuser}
           updatenewuser={this.updateNewUser}
-        /> */}
-        <MainContainer />
+        />
+        {/* <MainContainer /> */}
       </div>
     );
   }
