@@ -28,18 +28,21 @@ class MainContainer extends Component {
         this.getJobs()
     }
 
-    deleteJob = (id) => {
-        fetch(`${baseUrl}/jobs/` + id, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-          }).then(r => r.json())
-          .then(data => {
-            const newJobs = this.state.allJobs.filter((job) => job.id !== id);
-            this.setState({allJobs: newJobs});
-          });
-    }
+    deleteJob = (e, id) => {
+        // e.stopPropagation()
+        // e.stopPropagation();
+        // debugger
+        fetch(`${baseUrl}/jobs/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        }).then(r => r.json())
+        .then(data => {
+        const newJobs = this.state.allJobs.filter((job) => job.id !== id);
+        this.setState({allJobs: newJobs});
+        });
+  }
 
     updateJobName = (name) => {
         this.setState({ name })

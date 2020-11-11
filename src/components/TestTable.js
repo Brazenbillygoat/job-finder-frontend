@@ -23,8 +23,6 @@ class TestTable extends Component {
                         <td className='opration'>
                             {/* add buttons here for edit */}
                             <button className='button' onClick={(e) => {this.props.deleteJob(e, job.id)}}>Delete</button> 
-                            {/* <button className='button' onClick={(e) => {console.log(job.id);}}>Delete</button>  */}
-
                             <button className='button' onClick={() => console.log("edit clicked")}>Edit</button>
                         </td>
                     </tr>
