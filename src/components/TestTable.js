@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 class TestTable extends Component {
 
     render() {
@@ -22,8 +22,8 @@ class TestTable extends Component {
                         <td>{job.company_id}</td>
                         <td className='opration'>
                             {/* add buttons here for edit */}
-                            <button className='button' onClick={(e) => {this.props.deleteJob(e, job.id)}}>Delete</button> 
-                            <button className='button' onClick={() => console.log("edit clicked")}>Edit</button>
+                            <button className='button' onClick={() => {this.props.deleteJob(job.id)}}>Delete</button> 
+                            <Link className='button' to={`/jobs/edit/${job.id}`}>Edit</Link>
                         </td>
                     </tr>
                 )
