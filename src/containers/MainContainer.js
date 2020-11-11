@@ -13,12 +13,32 @@ class MainContainer extends Component {
         allBids: []
     }
 
+    getJobs = () => {
+        fetch(`${baseUrl}/jobs`)
+        .then(r => r.json())
+        .then(data => this.setState({allJobs: data}))
+    }
+
     async componentDidMount(){
-        let headers = {headers: {"Authentication": `Bearer ${localStorage.getItem("token")}`}}
-        const res = await fetch(`${baseUrl}/bids`, headers)
-        const allBids = await res.json()
-        console.log(allBids)
+        // let headers = {headers: {"Authentication": `Bearer ${localStorage.getItem("token")}`}}
+        // const res = await fetch(`${baseUrl}/bids`, headers)
+        // const allBids = await res.json()
+        // console.log(allBids)
         // this.setState({ allBids })
+        this.getJobs()
+    }
+
+    deleteJob = (id) => {
+        fetch(`${baseUrl}/jobs/` + id, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          }).then(r => r.json())
+          .then(data => {
+            const newJobs = this.state.allJobs.filter((job) => job.id !== id);
+            this.setState({allJobs: newJobs});
+          });
     }
 
     updateJobName = (name) => {
@@ -53,6 +73,7 @@ class MainContainer extends Component {
                             updateJobPrice={this.updateJobPrice}
                             updateJobDeadline={this.updateJobDeadline}
                             updateAllJobs={this.updateAllJobs}
+                            deleteJob={this.deleteJob}
                     />
                 </div>
 

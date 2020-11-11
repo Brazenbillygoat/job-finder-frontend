@@ -1,80 +1,50 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import LoginContainer from '../containers/LoginContainer'
-import editForm from './EditForm'
+import React, { Component } from 'react';
 
+class TestTable extends Component {
 
-//Example api need to use our api here 
-const URL = 'http://localhost:3000/jobs'
-
-
-//Need to refactor when we get our api
-const Table = () => {
+    render() {
+        const renderHeader = () => {
+            let headerElement = ['id', 'Job', 'Price', 'Deadline', 'Awarded Company', 'operation']
     
-    const [employees, setEmployees] = useState([])
-    const [isShown, setShown] = useState(false)
-    
-    useEffect(() => {
-        getData()
-    }, [])
-    
-    const getData = async () => {
+            return headerElement.map((key, index) => {
+                return <th key={index}>{key.toUpperCase()}</th>
+            })
+        }
 
-        const response = await axios.get(URL)
-        setEmployees(response.data)
+        const renderBody = () => {
+            return this.props.allJobs.map(job => {
+                return (
+                    <tr key={job.id}>
+                        <td>{job.id}</td>
+                        <td>{job.name}</td>
+                        <td>{job.price}</td>
+                        <td>{job.deadline}</td>
+                        <td>{job.company_id}</td>
+                        <td className='opration'>
+                            {/* add buttons here for edit */}
+                            <button className='button' onClick={(e) => {this.props.deleteJob(e, job.id)}}>Delete</button> 
+                            {/* <button className='button' onClick={(e) => {console.log(job.id);}}>Delete</button>  */}
+
+                            <button className='button' onClick={() => console.log("edit clicked")}>Edit</button>
+                        </td>
+                    </tr>
+                )
+            })
+        }
+        return (
+            <div>
+                <h1 id='title'>Jobs</h1>
+                <table id='jobs'>
+                    <thead>
+                        <tr>{renderHeader()}</tr>
+                    </thead>
+                    <tbody>
+                        {renderBody()}
+                    </tbody>
+                </table>
+            </div>
+        );
     }
-
-    const removeData = (id) => {
-
-        axios.delete(`${URL}/${id}`).then(res => {
-            const del = employees.filter(employee => id !== employee.id)
-            setEmployees(del)
-        })
-    }
-
-    //Need to refactor when we get our api
-    const renderHeader = () => {
-        let headerElement = ['id', 'Job', 'Price', 'Deadline', 'Awarded Company', 'operation']
-
-        return headerElement.map((key, index) => {
-            return <th key={index}>{key.toUpperCase()}</th>
-        })
-    }
-
-    const renderBody = () => {
-        return employees && employees.map(({ id, name, price, deadline, company_id }) => {
-            return (
-                <tr key={id}>
-                    {/* add create job, either here or navbar */}
-                    <td>{id}</td>
-                    <td>{name}</td>
-                    <td>{price}</td>
-                    <td>{deadline}</td>
-                    <td>{company_id.name}</td>
-                    <td className='opration'>
-                        {/* add buttons here for edit */}
-                        <button className='button' onClick={() => removeData(id)}>Delete</button>                        
-                        <button className='button' onClick={() => setShown(true)}>Edit</button>
-                    </td>
-                </tr>
-            )
-        })
-    }
-
-    return (
-        <>
-            <h1 id='title'>Jobs</h1>
-            <table id='jobs'>
-                <thead>
-                    <tr>{renderHeader()}</tr>
-                </thead>
-                <tbody>
-                    {renderBody()}
-                </tbody>
-            </table>
-        </>
-    )
 }
 
-
-export default Table
+export default TestTable;

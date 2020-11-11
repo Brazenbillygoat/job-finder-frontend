@@ -13,29 +13,6 @@ class HomePage extends Component {
         viewJobs: false
     }
 
-    // getAllJobs = () => {
-    //     debugger
-    //     fetch("http//:localhost3000/jobs")
-    //     .then(resp => resp.json())
-    //     .then(jobs => {
-    //         debugger
-    //         this.props.updateAllJobs(jobs)
-    //         console.log(jobs)
-    //     })
-    // }
-
-    // componentDidMount() {
-    //     // this.getAllJobs()
-        
-    //     fetch("http://localhost3000/jobs")
-    //     .then(resp => resp.json())
-    //     .then(jobs => {
-    //         debugger
-    //         this.props.updateAllJobs(jobs)
-    //         console.log(jobs)
-    //     })
-    // }
-
     createNewJob = async (e) => {
         e.preventDefault();
         
@@ -74,9 +51,8 @@ class HomePage extends Component {
             <Router>
                 
                <div>
-                    {this.state.viewJobs ? <div><TestTable /><button className="btn btn-danger btn-block btn-lg" onClick={this.exitJobsTable}>Exit</button></div> 
-                    : <button  className="btn btn-primary btn-lg pull-left" onClick={this.updateViewJobs}>Jobs</button>}
-                    {/* <button>Create Job</button> */}
+                    <TestTable allJobs={this.props.allJobs}
+                                deleteJob={this.props.deleteJob}/>
                 </div>
                 <Switch>
                     <Route path="/jobs/new" render={() => {
