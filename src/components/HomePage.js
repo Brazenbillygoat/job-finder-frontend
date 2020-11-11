@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TestTable from './TestTable'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NewJobForm from './NewJobForm';
-import EditFrom from './EditForm'
+import EditForm from './EditForm'
 
 class HomePage extends Component {
 
@@ -70,7 +70,7 @@ class HomePage extends Component {
                 <Switch>
                     <Route path="/jobs/edit" render={() => {
                         return(
-                            <EditFrom name={name}
+                            <EditForm name={name}
                                         price={price}
                                         deadline={deadline}
                                         updateJobName={updateJobName}

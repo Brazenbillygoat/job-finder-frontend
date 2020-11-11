@@ -5,7 +5,7 @@ import editForm from './EditForm'
 
 
 //Example api need to use our api here 
-const URL = 'https://jsonplaceholder.typicode.com/users'
+const URL = 'http://localhost:3000/jobs'
 
 
 //Need to refactor when we get our api
@@ -42,15 +42,15 @@ const Table = () => {
     }
 
     const renderBody = () => {
-        return employees && employees.map(({ id, name, email, phone }) => {
+        return employees && employees.map(({ id, name, price, deadline, company_id }) => {
             return (
                 <tr key={id}>
                     {/* add create job, either here or navbar */}
                     <td>{id}</td>
                     <td>{name}</td>
-                    <td>{email}</td>
-                    <td>{phone}</td>
-                    <td>Name of Company</td>
+                    <td>{price}</td>
+                    <td>{deadline}</td>
+                    <td>{company_id.name}</td>
                     <td className='opration'>
                         {/* add buttons here for edit */}
                         <button className='button' onClick={() => removeData(id)}>Delete</button>                        
