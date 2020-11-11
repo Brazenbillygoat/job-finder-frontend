@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import NavBar from '../components/NavBar'
-import HomePage from '../components/HomePage'
+import NavBar from '../components/NavBar';
+import HomePage from '../components/HomePage';
+const baseUrl = 'http://localhost:3000';
 
 class MainContainer extends Component {
 
@@ -8,7 +9,16 @@ class MainContainer extends Component {
         name: "",
         price: 0,
         deadline: 0,
-        allJobs: []
+        allJobs: [],
+        allBids: []
+    }
+
+    async componentDidMount(){
+        let headers = {headers: {"Authentication": `Bearer ${localStorage.getItem("token")}`}}
+        const res = await fetch(`${baseUrl}/bids`, headers)
+        const allBids = await res.json()
+        console.log(allBids)
+        // this.setState({ allBids })
     }
 
     updateJobName = (name) => {
@@ -38,6 +48,7 @@ class MainContainer extends Component {
                             price={this.state.price}
                             deadline={this.state.deadline}
                             allJobs={this.state.allJobs}
+                            allBids={this.state.allBids}
                             updateJobName={this.updateJobName}
                             updateJobPrice={this.updateJobPrice}
                             updateJobDeadline={this.updateJobDeadline}

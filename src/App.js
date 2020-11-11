@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import LoginContainer from './containers/LoginContainer';
 import MainContainer from './containers/MainContainer'
-let baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://localhost:3000';
 
 
 export default class App extends Component {
@@ -31,7 +31,7 @@ async componentDidMount(){
   }
 }
 
-authorizeUser = (e, username, password) => {
+authorizeUser = (e) => {
   e.preventDefault();
   let login = {
     name: e.currentTarget.elements[0].value, 
@@ -48,7 +48,6 @@ authorizeUser = (e, username, password) => {
     })
     .then(res => res.json())
     .then(user => {
-      debugger
       localStorage.setItem("token", user.token)
       // localStorage.setItem("userName", JSON.stringify(user.name))
     })
