@@ -6,12 +6,20 @@ export default class NewJobForm extends Component {
 
   render() {
 
-    const { name, price, deadline, updateJobName, updateJobPrice, updateJobDeadline } = this.props
+    const { name, 
+            price, 
+            deadline, 
+            updateJobName, 
+            updateJobPrice, 
+            updateJobDeadline,
+            createNewJob
+          } = this.props
+
 
     return(
 
       <div>
-        <form action="/action_page.php">
+        <form onSubmit={(e) => createNewJob(e)}>
           <h2 className="new-job-header">New Job</h2>
           <div className="form-group">
             <label>
@@ -44,7 +52,7 @@ export default class NewJobForm extends Component {
               />
             </label>
           </div>
-
+          <input className="btn btn-primary" type="submit" value="Create New Job" />
         </form>
       </div>
     )

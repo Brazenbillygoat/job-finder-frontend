@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import TestTable from './TestTable'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import NewJobForm from './NewJobForm';
-import EditForm from './EditForm'
+import EditForm from './EditForm';
+let baseUrl = 'http://localhost:3000';
 
 class HomePage extends Component {
 
@@ -33,8 +35,30 @@ class HomePage extends Component {
     //         console.log(jobs)
     //     })
     // }
+
+    createNewJob = async (e) => {
+        e.preventDefault();
+        
+        const newJobInfo = { method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authentication': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({
+                name: e.currentTarget.elements[0].value,
+                price: e.currentTarget.elements[1].value,
+                deadline: e.currentTarget.elements[2].value
+                
+            })
+        }
+        
+        const res = await fetch(`${baseUrl}/jobs/new`, newJobInfo)
+        const newJob = await res.json()
+        console.log(newJob)
+
+    }
     
-    showJobsTable = () => {
+    updateViewJobs = () => {
         this.setState({ viewJobs: true})
     }
     
@@ -51,7 +75,7 @@ class HomePage extends Component {
                 
                <div>
                     {this.state.viewJobs ? <div><TestTable /><button className="btn btn-danger btn-block btn-lg" onClick={this.exitJobsTable}>Exit</button></div> 
-                    : <button  className="btn btn-primary btn-lg pull-left" onClick={this.showJobsTable}>Jobs</button>}
+                    : <button  className="btn btn-primary btn-lg pull-left" onClick={this.updateViewJobs}>Jobs</button>}
                     {/* <button>Create Job</button> */}
                 </div>
                 <Switch>
@@ -63,11 +87,11 @@ class HomePage extends Component {
                                         updateJobName={updateJobName}
                                         updateJobPrice={updateJobPrice}
                                         updateJobDeadline={updateJobDeadline}
+                                        createNewJob={this.createNewJob}
                             />
                         )}
                     }/>
-                </Switch>
-                <Switch>
+              
                     <Route path="/jobs/edit" render={() => {
                         return(
                             <EditForm name={name}
@@ -79,6 +103,11 @@ class HomePage extends Component {
                             />
                         )}
                     }/>
+                    {/* <Route path="/bids" render{() => {
+                        return(
+
+                        )}
+                    }/> */}
                 </Switch>
             </Router>
         );

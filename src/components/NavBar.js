@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { Link } from 'react-router-dom';
 
 export default class NavBar extends Component {
 
@@ -39,8 +40,8 @@ export default class NavBar extends Component {
             </div>
             <ul className="nav navbar-nav">
               <li className="active"><img src="images/hardhat-worker.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy" /></li>
-              <li><a href="/jobs/new">Home</a></li>
-              <li><a href="/">Create a Job</a></li>
+              <li><a href="/jobs/new">Create a Job</a></li>
+              <li><a href="/jobs/new">My Bids</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
               {/* <li><a href="#"><span className="glyphicon glyphicon-user"></span> Sign Up</a></li>
