@@ -2,37 +2,13 @@ import React, { Component } from 'react';
 import TestTable from './TestTable'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
-import NewJobForm from './NewJobForm';
 import EditForm from './EditForm';
+import NewJobForm from './NewJobForm';
 let baseUrl = 'http://localhost:3000';
 
 class HomePage extends Component {
-
-    
     state = {
         viewJobs: false
-    }
-
-    createNewJob = async (e) => {
-        e.preventDefault();
-        
-        const newJobInfo = { method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authentication': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify({
-                name: e.currentTarget.elements[0].value,
-                price: e.currentTarget.elements[1].value,
-                deadline: e.currentTarget.elements[2].value
-                
-            })
-        }
-        
-        const res = await fetch(`${baseUrl}/jobs/new`, newJobInfo)
-        const newJob = await res.json()
-        console.log(newJob)
-
     }
     
     updateViewJobs = () => {
@@ -45,8 +21,7 @@ class HomePage extends Component {
     
     
     render() {
-        const { name, price, deadline, allJobs, updateJobName, updateJobPrice, updateJobDeadline, updateAllJobs } = this.props
-        // this.getAllJobs()
+        const { allJobs, deleteJob, createNewJob, updateJob } = this.props;
         return (
             <Router>   
                 <Switch>
@@ -59,26 +34,13 @@ class HomePage extends Component {
                     }/>
                     <Route exact path="/jobs/new" render={() => {
                         return(
-                            <NewJobForm name={name}
-                                        price={price}
-                                        deadline={deadline}
-                                        updateJobName={updateJobName}
-                                        updateJobPrice={updateJobPrice}
-                                        updateJobDeadline={updateJobDeadline}
-                                        createNewJob={this.createNewJob}
-                            />
+                            <NewJobForm createNewJob={createNewJob} />
                         )}
                     }/>
               
-                    <Route exact path="/jobs/edit" render={() => {
+                    <Route path="/jobs/edit/:id" render={() => {
                         return(
-                            <EditForm name={name}
-                                        price={price}
-                                        deadline={deadline}
-                                        updateJobName={updateJobName}
-                                        updateJobPrice={updateJobPrice}
-                                        updateJobDeadline={updateJobDeadline}
-                            />
+                            <EditForm updateJob={updateJob} />
                         )}
                     }/>
                     <Route exact path="/bids" render={() => {

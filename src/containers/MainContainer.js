@@ -6,9 +6,6 @@ const baseUrl = 'http://localhost:3000';
 class MainContainer extends Component {
 
     state = {
-        name: "",
-        price: 0,
-        deadline: 0,
         allJobs: [],
         allBids: []
     }
@@ -33,12 +30,58 @@ class MainContainer extends Component {
         )})
     }
 
-    componentDidMount(){
-        this.getBids()
+    async componentDidMount(){
         this.getJobs()
+        this.getBids()
     }
 
-    deleteJob = (e, id) => {
+    createNewJob = async (state) => {
+        // ToDo: Fix backend
+        console.log(state)       
+        fetch(`${baseUrl}/jobs/new`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authentication': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: state      
+        }).then(() => {
+            this.setState({
+                allJobs: [...this.state.allJobs,
+                    state
+                ]
+            })
+        })
+
+    }
+
+    updateJob = (id, name, price, deadline) => {
+        const oldJob = this.state.allJobs.filter((job) => job.id === id);
+        const remainingJobs = this.state.allJobs.filter((job) => job.id !== id)
+        const newJob = {
+            id: id,
+            name: name,
+            price: price,
+            deadline: deadline,
+        }
+        console.log(newJob);
+        fetch(`${baseUrl}/jobs/${id}`, {
+            method: 'PATCH',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authentication': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: newJob,
+        }).then(() => {
+            this.setState({allJobs: [
+                ...remainingJobs,
+                newJob,
+            ]})
+        })
+
+    }
+
+    deleteJob = (id) => {
         fetch(`${baseUrl}/jobs/${id}`, {
         method: 'DELETE',
         headers: {
@@ -49,22 +92,6 @@ class MainContainer extends Component {
         const newJobs = this.state.allJobs.filter((job) => job.id !== id);
         this.setState({allJobs: newJobs});
         });
-  }
-
-    updateJobName = (name) => {
-        this.setState({ name })
-    }
-
-    updateJobPrice = (price) => {
-        this.setState({ price })
-    }
-
-    updateJobDeadline = (deadline) => {
-        this.setState({ deadline })
-    }
-
-    updateAllJobs = (allJobs) => {
-        this.setState({allJobs})
     }
     
     render() {
@@ -77,19 +104,13 @@ class MainContainer extends Component {
                     />
                 </div>
                 <div>
-                    <HomePage name={this.state.name}
-                            price={this.state.price}
-                            deadline={this.state.deadline}
-                            allJobs={this.state.allJobs}
-                            allBids={this.state.allBids}
-                            updateJobName={this.updateJobName}
-                            updateJobPrice={this.updateJobPrice}
-                            updateJobDeadline={this.updateJobDeadline}
-                            updateAllJobs={this.updateAllJobs}
-                            deleteJob={this.deleteJob}
+                    <HomePage   allJobs = {this.state.allJobs} 
+                                deleteJob = {this.deleteJob}
+                                createNewJob = {this.createNewJob}
+                                updateJob = {this.updateJob}
+                                allBids = {this.state.allBids}
                     />
                 </div>
-
             </div>
         );
     }

@@ -63,6 +63,7 @@ export default class NavBar extends Component {
                    loading="lazy" 
                 />
               </li>
+              <li><a href="/jobs">Jobs Table</a></li>
               {this.navbarMakeJob()}
               <li><a href="/bids">My Bids</a></li>
             </ul>
