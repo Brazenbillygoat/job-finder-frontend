@@ -19,19 +19,26 @@ class MainContainer extends Component {
         .then(data => this.setState({allJobs: data}))
     }
 
-    async componentDidMount(){
-        // let headers = {headers: {"Authentication": `Bearer ${localStorage.getItem("token")}`}}
-        // const res = await fetch(`${baseUrl}/bids`, headers)
-        // const allBids = await res.json()
-        // console.log(allBids)
-        // this.setState({ allBids })
+    getBids = () => {
+        let userInfo = { method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authentication': `Bearer ${localStorage.getItem('token')}`
+        } }
+
+        fetch(`${baseUrl}/mybids`, userInfo)
+        .then(r => r.json())
+        .then(data => {
+            this.setState({allBids: data}
+        )})
+    }
+
+    componentDidMount(){
+        this.getBids()
         this.getJobs()
     }
 
     deleteJob = (e, id) => {
-        // e.stopPropagation()
-        // e.stopPropagation();
-        // debugger
         fetch(`${baseUrl}/jobs/${id}`, {
         method: 'DELETE',
         headers: {
@@ -64,7 +71,10 @@ class MainContainer extends Component {
         return (
             <div>
                 <div>
-                    <NavBar />
+                    <NavBar
+                        isGovernment={this.props.isGovernment}
+                        updateIsGovernment={this.props.updateIsGovernment}
+                    />
                 </div>
                 <div>
                     <HomePage name={this.state.name}

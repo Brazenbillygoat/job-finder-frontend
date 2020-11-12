@@ -4,21 +4,34 @@ import React, { Component } from 'react';
 export default class NavBar extends Component {
 
   navbarSignupOrLoginButton = () => {
-    if (!this.props.newUser) {
+    if (localStorage.getItem("token")) {
       return (
-        <li className="glyphicon glyphicon-user" onClick={() => {this.props.updatenewuser(true);
-                                                 this.props.resetForm();  
-                                                }
-                                          }>
+        <li className="glyphicon glyphicon-user"
+         onClick={() => {
+            localStorage.clear(); 
+            this.props.updateIsGovernment(null)
+          }}>
+          Log Out
+        </li>
+      )
+    }
+    else if (!this.props.newUser) {
+      return (
+        <li className="glyphicon glyphicon-user"
+         onClick={() => {
+            this.props.updatenewuser(true);
+            this.props.resetForm();  
+          }}>
           Sign Up
         </li>
       )
     }
     return(
-      <li className="glyphicon glyphicon-log-in" onClick={() => {this.props.updatenewuser(false);
-                                               this.props.resetForm();
-                                              }
-                                        }>
+      <li className="glyphicon glyphicon-log-in" 
+          onClick={() => {
+            this.props.updatenewuser(false);
+            this.props.resetForm();
+          }}>
         Log In
       </li>
     )
@@ -26,7 +39,9 @@ export default class NavBar extends Component {
   }
 
   navbarMakeJob = () => {
-    
+    if (localStorage.getItem("token") && localStorage.getItem("isGovernment") == "true") {
+      return <li><a href="/jobs/new">Create a Job</a></li>
+    }
   }
 
   render() {
@@ -39,9 +54,17 @@ export default class NavBar extends Component {
               <a className="navbar-brand" href="/">Job Finder</a>
             </div>
             <ul className="nav navbar-nav">
-              <li className="active"><img src="images/hardhat-worker.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy" /></li>
-              <li><a href="/jobs/new">Create a Job</a></li>
-              <li><a href="/jobs/new">My Bids</a></li>
+              <li className="active">
+                <img src="images/hardhat-worker.png"
+                   width="30" 
+                   height="30" 
+                   className="d-inline-block align-top" 
+                   alt="silouette of a worker" 
+                   loading="lazy" 
+                />
+              </li>
+              {this.navbarMakeJob()}
+              <li><a href="/bids">My Bids</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
               {/* <li><a href="#"><span className="glyphicon glyphicon-user"></span> Sign Up</a></li>

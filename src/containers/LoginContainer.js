@@ -11,7 +11,7 @@ export default class LoginContainer extends Component {
     username: "",
     password: "",
     confirmPassword: "",
-    isGovernment: false
+    
   }
 
   //this changes what the button ad label at the top of the LoginForm will display
@@ -45,12 +45,6 @@ export default class LoginContainer extends Component {
     })
   }
 
-  updateIsGovernment = (val) => {
-    let isGovernment;
-    val === "true" ? isGovernment = false : isGovernment = true
-    this.setState({isGovernment})
-  }
-
   passwordsMatchOnSignup = () => {
     if (this.state.password 
         && 
@@ -77,13 +71,13 @@ export default class LoginContainer extends Component {
           <LoginForm 
             username={this.state.username}
             password={this.state.password}
-            confirmPassword={this.state.confirmPassword}
+            confirmPassword={this.props.confirmPassword}
             isGovernment={this.state.isGovernment}
             updateUsername={this.updateUsername}
             updatePassword={this.updatePassword}
             updateConfirmPassword={this.updateConfirmPassword}
             passwordsMatch={this.passwordsMatchOnSignup}
-            updateIsGovernment={this.updateIsGovernment}
+            updateIsGovernment={this.props.updateIsGovernment}
             submitForm={this.props.authorizeUser}
             formlabel={this.formLabel()}
           />

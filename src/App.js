@@ -11,11 +11,18 @@ export default class App extends Component {
 
   state = {
     newuser: false,
-    loggedIn: false 
+    loggedIn: false,
+    isGovernment: !!localStorage.getItem("isGovernment")
   }
 
 updateNewUser = (newuser) => {
   this.setState({ newuser })
+}
+
+updateIsGovernment = (val) => {
+  let isGovernment;
+  val === "true" ? isGovernment = false : isGovernment = true
+  this.setState({isGovernment})
 }
 
 async componentDidMount(){
@@ -50,8 +57,8 @@ async componentDidMount(){
       .then(res => res.json())
       .then(user => {
         localStorage.setItem("token", user.token)
+        localStorage.setItem("isGovernment", user["user"]["isGovernment"])
         window.location.reload()
-        // localStorage.setItem("userName", JSON.stringify(user.name))
       })
       
     } else {
@@ -69,8 +76,9 @@ async componentDidMount(){
           })
           .then(res => res.json())
           .then(user => {
-            localStorage.setItem("userId", JSON.stringify(user.id))
-            localStorage.setItem("userName", JSON.stringify(user.name))
+            this.setState({ isGovernment: user["user"]["isGovernment"] })
+            localStorage.setItem("token", user.token)
+            localStorage.setItem("isGovernment", user["user"]["isGovernment"])
             window.location.reload()
           })
           .catch((error) => {
@@ -83,14 +91,19 @@ async componentDidMount(){
   tokenExist = () => {
     if(localStorage.getItem("token")){
       return(
-        <MainContainer />
+        <MainContainer
+          isGovernment={this.state.isGovernment}
+          updateIsGovernment={this.updateIsGovernment}
+        />
       )
     }
     return(
       <LoginContainer 
           authorizeUser={this.authorizeUser}
           newUser={this.state.newuser}
+          isGovernment={this.state.isGovernment}
           updatenewuser={this.updateNewUser}
+          updateIsGovernment={this.updateIsGovernment}
         />
     )
   }

@@ -48,14 +48,16 @@ class HomePage extends Component {
         const { name, price, deadline, allJobs, updateJobName, updateJobPrice, updateJobDeadline, updateAllJobs } = this.props
         // this.getAllJobs()
         return (
-            <Router>
-                
-               <div>
-                    <TestTable allJobs={this.props.allJobs}
-                                deleteJob={this.props.deleteJob}/>
-                </div>
+            <Router>   
                 <Switch>
-                    <Route path="/jobs/new" render={() => {
+                    <Route exact path="/jobs" render={() => {
+                        return(
+                            <TestTable iterable={this.props.allJobs}
+                                deleteJob={this.props.deleteJob}/>
+
+                        )}
+                    }/>
+                    <Route exact path="/jobs/new" render={() => {
                         return(
                             <NewJobForm name={name}
                                         price={price}
@@ -68,7 +70,7 @@ class HomePage extends Component {
                         )}
                     }/>
               
-                    <Route path="/jobs/edit" render={() => {
+                    <Route exact path="/jobs/edit" render={() => {
                         return(
                             <EditForm name={name}
                                         price={price}
@@ -79,11 +81,12 @@ class HomePage extends Component {
                             />
                         )}
                     }/>
-                    {/* <Route path="/bids" render{() => {
+                    <Route exact path="/bids" render={() => {
                         return(
-
-                        )}
-                    }/> */}
+                            <TestTable iterable={this.props.allBids}
+                            />
+                        )
+                    }}/>
                 </Switch>
             </Router>
         );
