@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import EditForm from './EditForm';
 import NewJobForm from './NewJobForm';
+import LandPage from './LandPage';
 let baseUrl = 'http://localhost:3000';
 
 class HomePage extends Component {
@@ -23,6 +24,7 @@ class HomePage extends Component {
     render() {
         const { allJobs, deleteJob, createNewJob, updateJob } = this.props;
         return (
+            <>
             <Router>
                <div>
                     <TestTable allJobs={allJobs}
@@ -42,6 +44,7 @@ class HomePage extends Component {
                     }/>
                 </Switch>
             </Router>
+            </>
         );
     }
 }
