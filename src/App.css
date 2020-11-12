@@ -109,6 +109,22 @@
     outline: none;
 }
 
+/* NAVBAR LOGIN/LOGOUT/SIGNUP */
+.log-out {
+  background-color: rgb(34, 34, 34);
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+  margin-top: 15px;
+  margin-right: 15px;
+  transition-duration: 0.4s;
+}
+
+.log-out:hover {
+  color: white;
+}
+
+
+
 .opration {
   text-align: center;
 }

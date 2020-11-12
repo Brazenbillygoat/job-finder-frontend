@@ -17,7 +17,7 @@ export default class NewJobForm extends Component {
     return(
 
       <div>
-        <form onSubmit={() => createNewJob(this.state)}>
+        <form onSubmit={(e) => createNewJob(e)}>
           <h2 className="new-job-header">New Job</h2>
           <div className="form-group">
             <label>
@@ -50,7 +50,7 @@ export default class NewJobForm extends Component {
               />
             </label>
           </div>
-          <input className="btn btn-primary" type="submit" value="Create New Job" />
+          <a href="http://localhost:3001/jobs"><input className="btn btn-primary" type="submit" value="Create New Job" /></a>
         </form>
       </div>
     )
