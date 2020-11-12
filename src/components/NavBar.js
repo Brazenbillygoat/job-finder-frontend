@@ -3,6 +3,12 @@ import React, { Component } from 'react';
 
 export default class NavBar extends Component {
 
+  dipsplayBids = () => {
+    if (localStorage.getItem("isGovernment") == "false") {
+      return <li><a href="/bids">My Bids</a></li>
+    }
+  }
+
   navbarSignupOrLoginButton = () => {
     if (localStorage.getItem("token")) {
       return (
@@ -26,6 +32,7 @@ export default class NavBar extends Component {
         </li>
       )
     }
+
     return(
       <li className="glyphicon glyphicon-log-in" 
           onClick={() => {
@@ -65,7 +72,7 @@ export default class NavBar extends Component {
               </li>
               <li><a href="/jobs">Jobs Table</a></li>
               {this.navbarMakeJob()}
-              <li><a href="/bids">My Bids</a></li>
+              {this.dipsplayBids()}
             </ul>
             <ul className="nav navbar-nav navbar-right">
               {/* <li><a href="#"><span className="glyphicon glyphicon-user"></span> Sign Up</a></li>

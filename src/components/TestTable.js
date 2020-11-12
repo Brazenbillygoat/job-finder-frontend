@@ -11,23 +11,45 @@ class TestTable extends Component {
             })
         }
 
-        const renderBody = (arr) => {
-            return arr.map(el => {
-                return (
-                    <tr key={el.id}>
-                        <td>{el.id}</td>
-                        <td>{el.name}</td>
-                        <td>{el.price}</td>
-                        <td>{el.deadline}</td>
-                        <td>{el.company_id}</td>
-                        <td className='opration'>
-                            {/* add buttons here for edit */}
-                            <button className='button' onClick={() => {this.props.deleteJob(el.id)}}>Delete</button> 
-                            <Link className='button' to={`/jobs/edit/${el.id}`}>Edit</Link>
-                        </td>
-                    </tr>
-                )
-            })
+        
+        const renderBody = (iterable) => {
+            
+            if (window.location.href.split("/").slice(-1).pop() == "jobs") {
+                return iterable.map(job => {
+                    return (
+                        <tr key={job.id}>
+                            <td>{job.id}</td>
+                            <td>{job.name}</td>
+                            <td>{job.price}</td>
+                            <td>{job.deadline}</td>
+                            <td>{job.company_id}</td>
+                            <td className='opration'>
+                                {/* add buttons here for edit */}
+                                <button className='button' onClick={() => {this.props.deleteJob(job.id)}}>Delete</button> 
+                                <Link className='button' to={`/jobs/edit/${job.id}`}>Edit</Link>
+                            </td>
+                        </tr>
+                    )
+                })
+            } else {
+                return iterable.map(bid => {
+                    return (
+                        <tr key={bid.id}>
+                            <td>{bid.id}</td>
+                            <td>{bid.notes}</td>
+                            <td>{bid.bid_price}</td>
+                            <td>{bid.time_to_completion}</td>
+                            <td>{bid.company_id}</td>
+                            <td className='opration'>
+                                {/* add buttons here for edit */}
+                                {/* <button className='button' onClick={() => {this.props.deleteJob(job.id)}}>Delete</button> 
+                                <Link className='button' to={`/jobs/edit/${job.id}`}>Edit</Link> */}
+                            </td>
+                        </tr>
+                    )
+                })
+            }
+
         }
         return (
             <div>

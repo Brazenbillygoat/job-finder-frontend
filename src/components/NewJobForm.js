@@ -17,7 +17,7 @@ export default class NewJobForm extends Component {
     return(
 
       <div>
-        <form onSubmit={() => createNewJob(this.state)}>
+        <form onSubmit={(e) => createNewJob(e)}>
           <h2 className="new-job-header">New Job</h2>
           <div className="form-group">
             <label>

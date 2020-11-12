@@ -31,11 +31,9 @@ async componentDidMount(){
     const res = await fetch(`${baseUrl}/home`, headers)
     const currentUser = await res.json()
     console.log(currentUser)
-    // this.setState({currentUser, loading: false})
 
   }else {
     console.log("no tokey");
-    // this.setState({loading: false})
   }
 }
 
@@ -58,6 +56,7 @@ async componentDidMount(){
       .then(user => {
         localStorage.setItem("token", user.token)
         localStorage.setItem("isGovernment", user["user"]["isGovernment"])
+        localStorage.setItem("id", user["user"]["id"])
         window.location.reload()
       })
       
@@ -79,6 +78,7 @@ async componentDidMount(){
             this.setState({ isGovernment: user["user"]["isGovernment"] })
             localStorage.setItem("token", user.token)
             localStorage.setItem("isGovernment", user["user"]["isGovernment"])
+            localStorage.setItem("id", user["user"]["id"])
             window.location.reload()
           })
           .catch((error) => {

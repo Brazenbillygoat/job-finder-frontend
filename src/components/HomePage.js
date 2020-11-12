@@ -21,14 +21,28 @@ class HomePage extends Component {
     
     
     render() {
-        const { allJobs, deleteJob, createNewJob, updateJob } = this.props;
+        const { allJobs, 
+                deleteJob, 
+                allBids, 
+                createNewJob, 
+                updateJob,
+                jobName,
+                updateJobName,
+                jobPrice,
+                updateJobPrice,
+                jobDeadline,
+                updateJobDeadline
+              } = this.props;
         return (
             <Router>   
                 <Switch>
                     <Route exact path="/jobs" render={() => {
                         return(
-                            <TestTable iterable={this.props.allJobs}
-                                deleteJob={this.props.deleteJob}/>
+                            <TestTable 
+                                iterable={allJobs}
+                                allBids={allBids}
+                                deleteJob={deleteJob}
+                            />
 
                         )}
                     }/>
@@ -40,12 +54,22 @@ class HomePage extends Component {
               
                     <Route path="/jobs/edit/:id" render={() => {
                         return(
-                            <EditForm updateJob={updateJob} />
+                            <EditForm 
+                                updateJob={updateJob} 
+                                jobName = {jobName}
+                                updateJobName = {updateJobName}
+                                jobPrice = {jobPrice}
+                                updateJobPrice = {updateJobPrice}
+                                jobDeadline = {jobDeadline}
+                                updateJobDeadline = {updateJobDeadline}
+                            />
                         )}
                     }/>
                     <Route exact path="/bids" render={() => {
                         return(
-                            <TestTable iterable={this.props.allBids}
+                            <TestTable 
+                                iterable={allBids}
+                                allJobs={allJobs}
                             />
                         )
                     }}/>

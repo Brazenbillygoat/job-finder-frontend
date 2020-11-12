@@ -1,19 +1,46 @@
 import React, { Component } from 'react';
 import NavBar from '../components/NavBar';
 import HomePage from '../components/HomePage';
+import { Redirect } from 'react-router';
 const baseUrl = 'http://localhost:3000';
 
 class MainContainer extends Component {
 
     state = {
         allJobs: [],
-        allBids: []
+        allBids: [],
+        jobName: "",
+        jobPrice: 0,
+        jobDeadline: "9999-12-31T23:59:59"
+    }
+
+    updateJobName = (jobName) =>  {
+        this.setState({jobName})
+    }
+
+    updateJobPrice = (jobPrice) =>  {
+        this.setState({jobPrice})
+    }
+
+    updateJobDeadline = (jobDeadline) =>  {
+        this.setState({jobDeadline})
     }
 
     getJobs = () => {
         fetch(`${baseUrl}/jobs`)
         .then(r => r.json())
-        .then(data => this.setState({allJobs: data}))
+        .then(data => {
+            let jobsForUser = data;
+            if (this.props.isGovernment == "true") {
+                jobsForUser = data.filter((job) => {
+                    return job.company_id !== parseInt(localStorage.getItem("id"))
+                })
+            }
+            this.setState({allJobs: jobsForUser})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     getBids = () => {
@@ -26,57 +53,65 @@ class MainContainer extends Component {
         fetch(`${baseUrl}/mybids`, userInfo)
         .then(r => r.json())
         .then(data => {
-            this.setState({allBids: data}
-        )})
+            this.setState({allBids: data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
-    async componentDidMount(){
+    componentDidMount(){
         this.getJobs()
         this.getBids()
     }
 
-    createNewJob = async (state) => {
-        // ToDo: Fix backend
-        console.log(state)       
-        fetch(`${baseUrl}/jobs/new`, {
+    createNewJob = (e) => {
+        // debugger
+        fetch(`${baseUrl}/jobs`, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
                 'Authentication': `Bearer ${localStorage.getItem('token')}`
             },
-            body: state      
-        }).then(() => {
-            this.setState({
-                allJobs: [...this.state.allJobs,
-                    state
-                ]
+            body: JSON.stringify({ 
+                name: e.target.elements[0].value,
+                price: e.target.elements[1].value,
+                deadline: e.target.elements[2].value
             })
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data)
         })
 
     }
 
-    updateJob = (id, name, price, deadline) => {
-        const oldJob = this.state.allJobs.filter((job) => job.id === id);
-        const remainingJobs = this.state.allJobs.filter((job) => job.id !== id)
+    updateJob = (e) => {
+        e.preventDefault();
+        //the line below grabs the id off the end of the url
+        let jobId = parseInt(window.location.href.split("/").slice(-1).pop())
         const newJob = {
-            id: id,
-            name: name,
-            price: price,
-            deadline: deadline,
+            name: this.state.jobName,
+            price: this.state.jobPrice,
+            deadline: this.state.jobDeadline,
         }
-        console.log(newJob);
-        fetch(`${baseUrl}/jobs/${id}`, {
+        fetch(`${baseUrl}/jobs/${jobId}`, {
             method: 'PATCH',
             headers: { 
+                // Accept: 'application/json',
                 'Content-Type': 'application/json',
                 'Authentication': `Bearer ${localStorage.getItem('token')}`
             },
-            body: newJob,
-        }).then(() => {
-            this.setState({allJobs: [
-                ...remainingJobs,
-                newJob,
-            ]})
+            body: JSON.stringify(newJob),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            let newJobs = this.getJobs();
+            this.setState({allJobs: newJobs});
+            <Redirect to="/jobs" />
+        })
+        .catch((err) => {
+            console.log(err)
         })
 
     }
@@ -109,6 +144,12 @@ class MainContainer extends Component {
                                 createNewJob = {this.createNewJob}
                                 updateJob = {this.updateJob}
                                 allBids = {this.state.allBids}
+                                jobName = {this.state.jobName}
+                                updateJobName = {this.updateJobName}
+                                jobPrice = {this.state.jobPrice}
+                                updateJobPrice = {this.updateJobPrice}
+                                jobDeadline = {this.state.jobDeadline}
+                                updateJobDeadline = {this.updateJobDeadline}
                     />
                 </div>
             </div>
