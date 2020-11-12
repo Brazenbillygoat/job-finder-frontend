@@ -35,7 +35,7 @@ class HomePage extends Component {
                 updateJobDeadline
               } = this.props;
         return (
-            <Router>   
+            <Router>
                 <Switch>
                     <Route exact path="/" render={() => {
                        return(
