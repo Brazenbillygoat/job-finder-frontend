@@ -50,7 +50,7 @@ export default class NewJobForm extends Component {
               />
             </label>
           </div>
-          <input className="btn btn-primary" type="submit" value="Create New Job" />
+          <a href="http://localhost:3001/jobs"><input className="btn btn-primary" type="submit" value="Create New Job" /></a>
         </form>
       </div>
     )

@@ -12,34 +12,34 @@ export default class NavBar extends Component {
   navbarSignupOrLoginButton = () => {
     if (localStorage.getItem("token")) {
       return (
-        <li className="glyphicon glyphicon-user"
+        <li className="glyphicon glyphicon-out log-out"
          onClick={() => {
             localStorage.clear(); 
             this.props.updateIsGovernment(null)
           }}>
-          Log Out
+          LogOut
         </li>
       )
     }
     else if (!this.props.newUser) {
       return (
-        <li className="glyphicon glyphicon-user"
+        <li className="glyphicon glyphicon-user log-out"
          onClick={() => {
             this.props.updatenewuser(true);
             this.props.resetForm();  
           }}>
-          Sign Up
+          SignUp
         </li>
       )
     }
 
     return(
-      <li className="glyphicon glyphicon-log-in" 
+      <li className="glyphicon glyphicon-log-in log-out" 
           onClick={() => {
             this.props.updatenewuser(false);
             this.props.resetForm();
           }}>
-        Log In
+        LogIn
       </li>
     )
     

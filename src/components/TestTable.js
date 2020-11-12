@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 class TestTable extends Component {
 
+
+
+
     render() {
         const renderHeader = () => {
             let headerElement = ['id', 'Job', 'Price', 'Deadline', 'Awarded Company', 'operation']
@@ -10,8 +13,28 @@ class TestTable extends Component {
                 return <th key={index}>{key.toUpperCase()}</th>
             })
         }
-
         
+        const renderJobNameForBids = (bid) => {
+            let jobName;
+            this.props.allJobs.find((job) => {
+                if (job.id == bid.job_id) {
+                    jobName = job.name
+                }
+                
+            })
+            return jobName
+        }
+
+        const renderAwardedCompanyForJobs = (job) => {
+            
+            if ( parseInt(localStorage.getItem("id")) === job.company_id ){
+                return ""
+            }
+            
+            return job.company_id
+            
+        }
+
         const renderBody = (iterable) => {
             
             if (window.location.href.split("/").slice(-1).pop() == "jobs") {
@@ -22,7 +45,7 @@ class TestTable extends Component {
                             <td>{job.name}</td>
                             <td>{job.price}</td>
                             <td>{job.deadline}</td>
-                            <td>{job.company_id}</td>
+                            <td>{renderAwardedCompanyForJobs(job)}</td>
                             <td className='opration'>
                                 {/* add buttons here for edit */}
                                 <button className='button' onClick={() => {this.props.deleteJob(job.id)}}>Delete</button> 
@@ -36,7 +59,8 @@ class TestTable extends Component {
                     return (
                         <tr key={bid.id}>
                             <td>{bid.id}</td>
-                            <td>{bid.notes}</td>
+                            <td>{renderJobNameForBids(bid)}</td>
+                            {/* <td>{bid.notes}</td> */}
                             <td>{bid.bid_price}</td>
                             <td>{bid.time_to_completion}</td>
                             <td>{bid.company_id}</td>
@@ -51,6 +75,8 @@ class TestTable extends Component {
             }
 
         }
+
+
         return (
             <div>
                 <h1 id='title'>Jobs</h1>
