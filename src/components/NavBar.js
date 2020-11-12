@@ -6,13 +6,13 @@ export default class NavBar extends Component {
   navbarSignupOrLoginButton = () => {
     if (localStorage.getItem("token")) {
       return (
-        <li className="glyphicon glyphicon-user"
+        <span className="glyphicon glyphicon-user"
          onClick={() => {
             localStorage.clear(); 
             this.props.updateIsGovernment(null)
           }}>
           Log Out
-        </li>
+        </span>
       )
     }
     else if (!this.props.newUser) {
