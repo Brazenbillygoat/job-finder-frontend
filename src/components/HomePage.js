@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TestTable from './TestTable'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
-import EditForm from './editForm';
+import EditForm from './EditForm';
 import LandPage from './LandPage'
 import NewJobForm from './NewJobForm';
 let baseUrl = 'http://localhost:3000';
